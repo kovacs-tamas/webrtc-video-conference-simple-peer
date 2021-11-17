@@ -1,56 +1,96 @@
 <html>
-
-<head>
+  <head>
     <script lang="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="/simple-peer/simplepeer.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <style>
-        .containers {
-            display: grid;
-            grid-gap: 5px;
-            grid-template-columns: repeat(auto-fit, 1fr);
-            grid-template-rows: repeat(auto-fit, 300px);
-        }
+      body {
+        background-color: rgb(32, 33, 36);
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-        .container {
-            display: flex;
-        }
+      .vid {
+        flex: 0 1 auto;
+        height: 300px;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid #434343;
+      }
 
-        .vid {
-            flex: 0 1 auto;
-            height: 400px;
-        }
+      #localVideo {
+        border: 1px solid #4caf50;
+      }
 
-        .settings {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 2px 2px;
-            cursor: pointer;
-        }
+      .settings {
+        padding: 10px;
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        background-color: rgba(32, 33, 36, 0.5);
+      }
+      .settings button {
+        margin: 6px;
+        border-radius: 50%;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .settings button.disabled {
+        background-color: #de0000;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="videos" class="container">
-        <video id="localVideo" class="vid" autoplay muted></video>
+      <video id="localVideo" class="vid" autoplay muted></video>
     </div>
-    <br />
-    <div style="display:block">
-        <button id="switchButton" class="settings" onclick="switchMedia()">Switch
-            Camera</button>
-        <button id="muteButton" class="settings" onclick="toggleMute()">Unmuted</button>
-        <button id="vidButton" class="settings" onclick="toggleVid()">Video Enabled</button>
+
+    <div class="settings">
+      <button id="switchButton" di onclick="switchMedia()">
+        <i class="material-icons">cameraswitch</i>
+      </button>
+      <button id="muteButtonOn" onclick="toggleMute()">
+        <i class="material-icons">volume_up</i>
+      </button>
+      <button
+        id="muteButtonOff"
+        class="disabled"
+        style="display: none"
+        onclick="toggleMute()"
+      >
+        <i class="material-icons">volume_off</i>
+      </button>
+      <button id="vidButtonOn" onclick="toggleVid()">
+        <i class="material-icons">videocam</i>
+      </button>
+      <button
+        id="vidButtonOff"
+        class="disabled"
+        style="display: none"
+        onclick="toggleVid()"
+      >
+        <i class="material-icons">videocam_off</i>
+      </button>
     </div>
-</body>
-<footer>
-    <script src='/js/main.js' lang="text/javascript"></script>
-
-
-</footer>
-
+  </body>
+  <footer>
+    <script src="/js/main.js" lang="text/javascript"></script>
+  </footer>
 </html>

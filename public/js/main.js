@@ -40,14 +40,7 @@ const configuration = {
  */
 let constraints = {
   audio: true,
-  video: {
-    // width: {
-    //     max: 300
-    // },
-    // height: {
-    //     max: 300
-    // }
-  },
+  video: true,
 };
 
 /////////////////////////////////////////////////////////
@@ -268,9 +261,13 @@ function toggleMute() {
   for (let index in localStream.getAudioTracks()) {
     localStream.getAudioTracks()[index].enabled =
       !localStream.getAudioTracks()[index].enabled;
-    muteButton.innerText = localStream.getAudioTracks()[index].enabled
-      ? 'Unmuted'
-      : 'Muted';
+    if (localStream.getAudioTracks()[index].enabled) {
+      muteButtonOn.style.display = 'block';
+      muteButtonOff.style.display = 'none';
+    } else {
+      muteButtonOn.style.display = 'none';
+      muteButtonOff.style.display = 'block';
+    }
   }
 }
 /**
@@ -280,9 +277,14 @@ function toggleVid() {
   for (let index in localStream.getVideoTracks()) {
     localStream.getVideoTracks()[index].enabled =
       !localStream.getVideoTracks()[index].enabled;
-    vidButton.innerText = localStream.getVideoTracks()[index].enabled
-      ? 'Video Enabled'
-      : 'Video Disabled';
+
+    if (localStream.getVideoTracks()[index].enabled) {
+      vidButtonOn.style.display = 'block';
+      vidButtonOff.style.display = 'none';
+    } else {
+      vidButtonOn.style.display = 'none';
+      vidButtonOff.style.display = 'block';
+    }
   }
 }
 
@@ -291,13 +293,21 @@ function toggleVid() {
  */
 function updateButtons() {
   for (let index in localStream.getVideoTracks()) {
-    vidButton.innerText = localStream.getVideoTracks()[index].enabled
-      ? 'Video Enabled'
-      : 'Video Disabled';
+    if (localStream.getVideoTracks()[index].enabled) {
+      vidButtonOn.style.display = 'block';
+      vidButtonOff.style.display = 'none';
+    } else {
+      vidButtonOn.style.display = 'none';
+      vidButtonOff.style.display = 'block';
+    }
   }
   for (let index in localStream.getAudioTracks()) {
-    muteButton.innerText = localStream.getAudioTracks()[index].enabled
-      ? 'Unmuted'
-      : 'Muted';
+    if (localStream.getAudioTracks()[index].enabled) {
+      muteButtonOn.style.display = 'block';
+      muteButtonOff.style.display = 'none';
+    } else {
+      muteButtonOn.style.display = 'none';
+      muteButtonOff.style.display = 'block';
+    }
   }
 }
